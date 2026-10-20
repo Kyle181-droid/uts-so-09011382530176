@@ -60,7 +60,7 @@ if (cd "$SOURCE_DIR" && busybox tar -czvf "$ARCHIVE_PATH" -- "${FILES[@]}"); the
     busybox tar -tzvf "$ARCHIVE_PATH"
 
     # Ukuran ditampilkan dalam format mudah dibaca, misalnya 4.0K.
-    ARCHIVE_SIZE="$(du -h "$ARCHIVE_PATH" | awk '{print $1}')"
+    ARCHIVE_SIZE="$(stat -c %s "$ARCHIVE_PATH")B"
 
     # Tambahkan tepat satu baris log untuk backup yang berhasil.
     printf '%s | %s | %s | %s\n' \
