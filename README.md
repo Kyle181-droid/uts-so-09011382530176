@@ -1,4 +1,4 @@
-# Tugas Besar UTS Sistem Operasi — Revandy Javier
+# UTS Sistem Operasi — Revandy Javier
 
 ## 1. Identitas
 
