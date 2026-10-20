@@ -53,10 +53,11 @@ if [[ "$FILE_COUNT" -eq 0 ]]; then
 fi
 
 # Buat arsip terkompresi. Hanya daftar file .txt dari find yang dimasukkan.
-if tar -czvf "$ARCHIVE_PATH" -C "$SOURCE_DIR" -T "$FILE_LIST"; then
+mapfile -t FILES < "$FILE_LIST"
+if (cd "$SOURCE_DIR" && busybox tar -czvf "$ARCHIVE_PATH" -- "${FILES[@]}"); then
     echo
     echo "Verifikasi isi arsip:"
-    tar -tzvf "$ARCHIVE_PATH"
+    busybox tar -tzvf "$ARCHIVE_PATH"
 
     # Ukuran ditampilkan dalam format mudah dibaca, misalnya 4.0K.
     ARCHIVE_SIZE="$(du -h "$ARCHIVE_PATH" | awk '{print $1}')"
