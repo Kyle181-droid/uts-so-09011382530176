@@ -44,7 +44,7 @@ done
 ### B. Beri izin eksekusi dan jalankan backup
 
 ```bash
-cd ~/uts-so-09011382530176
+cd ~/uts-so-github
 chmod +x script/*.sh
 ./script/backup.sh
 ```
@@ -56,7 +56,7 @@ Untuk memeriksa hasil:
 ```bash
 cat ~/backup_09011382530176/backup.log
 ls -lh ~/backup_09011382530176/
-tar -tzvf ~/backup_09011382530176/backup_09011382530176_TANGGAL_JAM.tar.gz
+busybox busybox busybox tar -tzvf ~/backup_09011382530176/backup_09011382530176_TANGGAL_JAM.tar.gz
 ```
 
 Ganti `TANGGAL_JAM` dengan timestamp nama arsip yang benar-benar dibuat.
@@ -66,7 +66,7 @@ Ganti `TANGGAL_JAM` dengan timestamp nama arsip yang benar-benar dibuat.
 Muat alias ke shell aktif:
 
 ```bash
-source ~/uts-so-09011382530176/script/alias.sh
+source ~/uts-so-github/script/alias.sh
 bk176
 ```
 
@@ -79,7 +79,7 @@ nano ~/.bashrc
 Tambahkan baris berikut (baris ini sama dengan yang ada di `script/alias.sh`):
 
 ```bash
-alias bk176='bash "$HOME/uts-so-09011382530176/script/backup.sh"'
+alias bk176='bash "$HOME/uts-so-github/script/backup.sh"'
 ```
 
 Simpan, lalu muat ulang konfigurasi:
@@ -92,7 +92,7 @@ bk176
 ### D. Menjalankan backup berulang
 
 ```bash
-cd ~/uts-so-09011382530176/script
+cd ~/uts-so-github/script
 ./backup_loop.sh &
 jobs -l
 ```
@@ -129,32 +129,3 @@ ls -lt ~/backup_09011382530176/backup_09011382530176_*.tar.gz
 
 Setelah lebih dari lima arsip dibuat, periksa bahwa hanya lima arsip terbaru yang tersisa.
 
-## 5. Bukti job control
-
-**Lengkapi bagian ini dengan keluaran terminal asli dari mesin Linux Anda. Jangan menggunakan keluaran contoh sebagai bukti bahwa pengujian telah dilakukan.** Untuk merekam bukti, masuk ke direktori script dan lakukan langkah berikut:
-
-1. Jalankan `./backup_loop.sh &`.
-2. Jalankan `jobs -l`.
-3. Jalankan `fg %N` dengan nomor job yang benar-benar tampil.
-4. Tekan **Ctrl+Z** pada keyboard.
-5. Jalankan `bg %N`.
-6. Jalankan `ps x` untuk memeriksa proses.
-7. Jalankan `kill %N`, lalu periksa kembali dengan `jobs -l`.
-
-Tempelkan keluaran teks terminal yang relevan di dalam blok kode Markdown berikut:
-
-```text
-[Tempel keluaran terminal asli untuk ./backup_loop.sh &, jobs -l,
-fg, Ctrl+Z, bg, ps x, dan kill di sini.]
-```
-
-## 6. Kendala dan solusi
-
-Catat hanya kendala yang benar-benar ditemui saat pengujian dan cara mengatasinya. Contoh masalah yang mungkin terjadi:
-
-- **Permission denied:** jalankan `chmod +x script/*.sh` dari direktori repository.
-- **`/bin/bash^M: bad interpreter`:** jika file diedit di Windows, jalankan `sed -i 's/\r$//' script/*.sh`.
-- **File tidak ditemukan:** periksa kembali NIM dan lokasi direktori sumber pada bagian variabel di `script/backup.sh`.
-- **GitHub menolak autentikasi:** gunakan Personal Access Token, bukan password akun GitHub.
-
-Ganti daftar contoh di atas dengan catatan kendala yang benar-benar Anda alami sebelum pengumpulan.
